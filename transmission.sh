@@ -43,9 +43,9 @@ make install DESTDIR=$BASE
 ########### #################################################################
 
 mkdir -p $SRC/openssl && cd $SRC/openssl
-$WGET http://www.openssl.org/source/openssl-1.0.1g.tar.gz
-tar zxvf openssl-1.0.1g.tar.gz
-cd openssl-1.0.1g
+$WGET http://www.openssl.org/source/openssl-1.0.1h.tar.gz
+tar zxvf openssl-1.0.1h.tar.gz
+cd openssl-1.0.1h
 
 cat << "EOF" > openssl.patch
 --- Configure_orig      2013-11-19 11:32:38.755265691 -0700
@@ -76,9 +76,9 @@ make install CC=mipsel-linux-gcc AR="mipsel-linux-ar r" RANLIB=mipsel-linux-ranl
 ########### #################################################################
 
 mkdir $SRC/gettext && cd $SRC/gettext
-$WGET http://ftp.gnu.org/pub/gnu/gettext/gettext-0.18.3.2.tar.gz
-tar zxvf gettext-0.18.3.2.tar.gz
-cd gettext-0.18.3.2
+$WGET http://ftp.gnu.org/pub/gnu/gettext/gettext-0.19.1.tar.gz
+tar zxvf gettext-0.19.1.tar.gz
+cd gettext-0.19.1
 
 $WGET https://raw.github.com/lancethepants/tomatoware/master/patches/spawn.patch
 patch -p1 < spawn.patch
@@ -99,9 +99,9 @@ make install DESTDIR=$BASE
 ######## ####################################################################
 
 mkdir $SRC/curl && cd $SRC/curl
-$WGET http://curl.haxx.se/download/curl-7.36.0.tar.gz
-tar zxvf curl-7.36.0.tar.gz
-cd curl-7.36.0
+$WGET http://curl.haxx.se/download/curl-7.37.0.tar.gz
+tar zxvf curl-7.37.0.tar.gz
+cd curl-7.37.0
 
 LDFLAGS=$LDFLAGS \
 CPPFLAGS=$CPPFLAGS \
