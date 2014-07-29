@@ -76,9 +76,9 @@ make install CC=mipsel-linux-gcc AR="mipsel-linux-ar r" RANLIB=mipsel-linux-ranl
 ########### #################################################################
 
 mkdir $SRC/gettext && cd $SRC/gettext
-$WGET http://ftp.gnu.org/pub/gnu/gettext/gettext-0.19.1.tar.gz
-tar zxvf gettext-0.19.1.tar.gz
-cd gettext-0.19.1
+$WGET http://ftp.gnu.org/pub/gnu/gettext/gettext-0.19.2.tar.gz
+tar zxvf gettext-0.19.2.tar.gz
+cd gettext-0.19.2
 
 $WGET https://raw.github.com/lancethepants/tomatoware/master/patches/spawn.patch
 patch -p1 < spawn.patch
@@ -99,9 +99,9 @@ make install DESTDIR=$BASE
 ######## ####################################################################
 
 mkdir $SRC/curl && cd $SRC/curl
-$WGET http://curl.haxx.se/download/curl-7.37.0.tar.gz
-tar zxvf curl-7.37.0.tar.gz
-cd curl-7.37.0
+$WGET http://curl.haxx.se/download/curl-7.37.1.tar.gz
+tar zxvf curl-7.37.1.tar.gz
+cd curl-7.37.1
 
 LDFLAGS=$LDFLAGS \
 CPPFLAGS=$CPPFLAGS \
@@ -145,9 +145,9 @@ make install DESTDIR=$BASE
 ################ ############################################################
 
 mkdir $SRC/transmission && cd $SRC/transmission
-$WGET http://download.transmissionbt.com/files/transmission-2.83.tar.xz
-tar xvJf transmission-2.83.tar.xz
-cd transmission-2.83
+$WGET http://download.transmissionbt.com/files/transmission-2.84.tar.xz
+tar xvJf transmission-2.84.tar.xz
+cd transmission-2.84
 
 LIBEVENT_CFLAGS="-I$DEST/include" \
 LIBEVENT_LIBS=$DEST/lib/libevent.la \
