@@ -45,9 +45,9 @@ make install DESTDIR=$BASE
 ########### #################################################################
 
 mkdir -p $SRC/openssl && cd $SRC/openssl
-$WGET https://www.openssl.org/source/openssl-1.0.2f.tar.gz
-tar zxvf openssl-1.0.2f.tar.gz
-cd openssl-1.0.2f
+$WGET https://www.openssl.org/source/openssl-1.0.2g.tar.gz
+tar zxvf openssl-1.0.2g.tar.gz
+cd openssl-1.0.2g
 
 ./Configure linux-mips32 \
 -mtune=mips32 -mips32 -ffunction-sections -fdata-sections -Wl,--gc-sections \
@@ -86,9 +86,9 @@ make install DESTDIR=$BASE
 ######## ####################################################################
 
 mkdir $SRC/curl && cd $SRC/curl
-$WGET http://curl.haxx.se/download/curl-7.47.0.tar.gz
-tar zxvf curl-7.47.0.tar.gz
-cd curl-7.47.0
+$WGET https://curl.haxx.se/download/curl-7.48.0.tar.gz
+tar zxvf curl-7.48.0.tar.gz
+cd curl-7.48.0
 
 LDFLAGS=$LDFLAGS \
 CPPFLAGS=$CPPFLAGS \
@@ -127,10 +127,16 @@ make install DESTDIR=$BASE
 ################ ############################################################
 
 mkdir $SRC/transmission && cd $SRC/transmission
-$WGET http://download.transmissionbt.com/files/transmission-2.84.tar.xz
-tar xvJf transmission-2.84.tar.xz
-cd transmission-2.84
+$WGET https://download.transmissionbt.com/files/transmission-2.92.tar.xz
+tar xvJf transmission-2.92.tar.xz
+cd transmission-2.92
 
+ZLIB_CFLAGS="-I$DEST/include" \
+ZLIB_LIBS=-L$DEST/lib \
+OPENSSL_CFLAGS="-I$DEST/include" \
+OPENSSL_LIBS=-L$DEST/lib \
+LIBCURL_CFLAGS="-I$DEST/include" \
+LIBCURL_LIBS=-L$DEST/lib \
 LIBEVENT_CFLAGS="-I$DEST/include" \
 LIBEVENT_LIBS=$DEST/lib/libevent.la \
 LDFLAGS=$LDFLAGS \
@@ -138,7 +144,10 @@ CPPFLAGS=$CPPFLAGS \
 CFLAGS=$CFLAGS \
 CXXFLAGS=$CXXFLAGS \
 $CONFIGURE \
---enable-lightweight
+--enable-lightweight \
+--with-crypto=openssl \
+--enable-cli \
+--disable-nls
 
-make LDFLAGS="-zmuldefs" LIBS="-all-static -ldl"
+make LDFLAGS="-zmuldefs" LIBS="-all-static -lcurl -ldl"
 make install DESTDIR=$BASE/transmission
